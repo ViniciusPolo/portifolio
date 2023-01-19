@@ -1,0 +1,39 @@
+[
+    {
+        "language": "spanish",
+        "welcome": "Bien venido",
+        "whoIAm": "Quien sou yo",
+        "whatIKnow": "Lo que yo sé",
+        "myProjects": "Mis proyectos",
+        "talkToMe": "Háblame",
+        "changeLanguage": "Cambiar idioma"
+    },
+    {
+        "language": "portuguese",
+        "welcome": "Bem Vindo",
+        "whoIAm": "Quem sou eu",
+        "whatIKnow": "O que eu sei",
+        "myProjects": "Meus Projetos",
+        "talkToMe": "Fale comigo",
+        "changeLanguage": "Alterar idioma"
+        
+    },
+    {
+        "language": "french",
+        "welcome": "Bienvenue",
+        "whoIAm": "Qui suis je",
+        "whatIKnow": "Ce que je sais",
+        "myProjects": "Mes projets",
+        "talkToMe": "Parle-moi",
+        "changeLanguage": "Changer de langue"
+    },
+    {
+        "language": "english",
+        "welcome": "Welcome",
+        "whoIAm": "Who am I",
+        "whatIKnow": "What I Know",
+        "myProjects": "My Projects",
+        "talkToMe": "Talk to me",
+        "changeLanguage": "Change Language"
+    }
+]
