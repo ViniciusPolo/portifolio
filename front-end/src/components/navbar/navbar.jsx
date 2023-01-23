@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./navbar.css"
+//import "./navbar.css"
+import { Div, Ul ,Li } from "./style";
 import words from "../../words.json"
 
 export default function Navbar(props) {
@@ -10,6 +11,8 @@ export default function Navbar(props) {
     const [myProjects, setMyProjects] = useState('');
     const [talkToMe, setTalkToMe] = useState('');
     const [changeLanguage, setChangeLanguage] = useState('');
+
+    //const secondaryColor = sessionStorage.getItem('secondaryColor')
 
     useEffect(() => {
 
@@ -23,14 +26,14 @@ export default function Navbar(props) {
     }, [])
 
     return (
-        <div className="navbar">
-            <ul className="navbar--list">
-                <li><Link to="/whoiam">{whoIAm}</Link></li>
-                <li><Link to="/whatiknow">{whatIknow}</Link></li>
-                <li><Link to="/">{myProjects}</Link></li>
-                <li><Link to="/talktome">{talkToMe}</Link></li>
-            <li><Link to="/">{changeLanguage}</Link></li>
-            </ul>
-        </div>
+        <Div className="navbar">
+            <Ul className="navbar--List">
+                <Li><Link to="/whoiam">{whoIAm}</Link></Li>
+                <Li><Link to="/whatiknow">{whatIknow}</Link></Li>
+                <Li><Link to="/">{myProjects}</Link></Li>
+                <Li><Link to="/talktome">{talkToMe}</Link></Li>
+            <Li><Link to="/">{changeLanguage}</Link></Li>
+            </Ul>
+        </Div>
     )
 }

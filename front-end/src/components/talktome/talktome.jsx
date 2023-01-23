@@ -57,7 +57,15 @@ export default function TalkToMe() {
           onChange={formik.handleChange}
           value={formik.values.comment}
         />
-
+        <Input
+          label="Comment"
+          id="comment"
+          name="comment"
+          placeholder="comment"
+          type="color"
+          onChange={formik.handleChange}
+          value={formik.values.comment}
+        />
         <button type="submit">Submit</button>
       </form>
     );
