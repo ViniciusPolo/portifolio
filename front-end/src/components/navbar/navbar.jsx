@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Div, Ul ,Li } from "./style";
 import words from "../../words.json"
 
-export default function Navbar(props) {
+export default function Navbar(params) {
     const language = sessionStorage.getItem('language')
     const [whoIAm, setWhoIAm] = useState('');
     const [whatIknow, setWhatIKnow] = useState('');
@@ -15,7 +15,7 @@ export default function Navbar(props) {
     //const secondaryColor = sessionStorage.getItem('secondaryColor')
 
     useEffect(() => {
-
+        console.log("color2", params.color2)
         const whoIAmSelected = words.find((e) => e.language === language)
         setWhoIAm(whoIAmSelected.whoIAm)
         setWhatIKnow(whoIAmSelected.whatIKnow)
@@ -26,8 +26,8 @@ export default function Navbar(props) {
     }, [])
 
     return (
-        <Div className="navbar">
-            <Ul className="navbar--List">
+        <Div props={params.color2} className="navbar">
+            <Ul props={params.color2} className="navbar--List">
                 <Li><Link to="/whoiam">{whoIAm}</Link></Li>
                 <Li><Link to="/whatiknow">{whatIknow}</Link></Li>
                 <Li><Link to="/">{myProjects}</Link></Li>

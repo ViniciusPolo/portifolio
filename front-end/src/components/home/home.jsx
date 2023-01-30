@@ -1,12 +1,19 @@
-import React from "react";
+import { React, useContext } from "react";
 import Navbar from "../navbar/navbar";
 import Whatiknow from "../whatiknow/whatiknow";
 import Whoiam from "../whoiam/whoiam";
+import Welcome from "../welcome/welcome"
 
 
-export default function Home() {
+export default function Home(props) {
+    //window.location.reload()
+    const cor = Welcome(props)
+    console.log("cor",props)
+
+
     const language = sessionStorage.getItem('language')
     function WelComeMessage(language) {
+        console.log("props", props)
         sessionStorage.getItem(language)
         console.log("------", language)
         if (language == "english") return "Hello, I'm Vinicius Polo, nice to meet you"
@@ -17,9 +24,9 @@ export default function Home() {
 
     return (
         <>
-        <Navbar language={language}/>
-        {WelComeMessage(language)}
-        
+            <Navbar props={props} language={language} />
+            {WelComeMessage(language)}
+
 
 
         </>

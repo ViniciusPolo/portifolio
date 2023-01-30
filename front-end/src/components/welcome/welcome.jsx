@@ -9,20 +9,26 @@ import { useFormik } from "formik";
 
 
 export default function Welcome(props) {
+    const [language, setLanguage] = useState((''));
+    const [color1, setColor1] = useState((''));
+    const [color2, setColor2] = useState((''));
+
+    function Colors() {
+        return [this.color1, color2]
+    }
 
     const SelectColors = () => {
-        const formik = useFormik({
-            initialValues: {
-                primaryColor: '',
-                secondaryColor: ''
+            const formik = useFormik({
+                initialValues: {
+                    primaryColor: '',
+                    secondaryColor: ''
 
-            },
-            onSubmit: values => {
-                sessionStorage.setItem('primaryColor', values.primaryColor)
-                sessionStorage.setItem('secondaryColor', values.secondaryColor)
-                alert(JSON.stringify(values, null, 2));
-            },
-        })
+                },
+                onSubmit: values => {
+                    setColor1(values.primaryColor)
+                    setColor2(values.secondaryColor)
+                },
+            })
 
         return (
             <form onSubmit={formik.handleSubmit}>
@@ -31,7 +37,7 @@ export default function Welcome(props) {
                     label="Primary Color"
                     id="primaryColor"
                     name="primaryColor"
-                    type="color"
+                    type="color"    
                     onChange={formik.handleChange}
                     value={formik.values.primaryColor}
                 />
@@ -89,8 +95,6 @@ export default function Welcome(props) {
         }
     }
 
-    const [language, setLanguage] = useState((''));
-
     const options = ["portuguese", "english", "spanish", "french"]
 
     return (
@@ -109,7 +113,7 @@ export default function Welcome(props) {
 
 
             </select>
-            <Button text={ChangeButton(language)} to="/home" language={language} />
+            <Button text={ChangeButton(language)} to={`/home`} color1={color1} color2={color2} language={language}/>
 
         </>
     )
