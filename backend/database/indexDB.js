@@ -2,10 +2,10 @@ const Sequelize = require('sequelize')
 const dbConfig = require('../config/database.js')
 
 const conexao = new Sequelize(dbConfig)
-const languages = require('../api/models/languagesModel')
+const languages = require('../api/models/LanguagesModel')
 
 try{
-    //conexao.authenthicate();
+    conexao.authenticate();
     console.log('Conexão estabelecida!')
 } catch (error) {
     console.log('Conexão não estabelecida =(')

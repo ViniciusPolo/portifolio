@@ -12,23 +12,39 @@ export default function Welcome(props) {
     const [language, setLanguage] = useState((''));
     const [color1, setColor1] = useState((''));
     const [color2, setColor2] = useState((''));
+    const [options, setOptions] = useState([]);
+    const option = [""]
+
+    useEffect(() => {
+        fetch(`http://localhost:3004/languages`)
+            .then(response => response.json())
+            .then((data) => {
+                data.map((e) => {
+                    option.push(e.language)
+                })
+                setOptions(option)
+            })
+            .catch((e) => {
+                console.error(`An error occurred: ${e}`)
+            });
+    }, [])
 
     function Colors() {
         return [this.color1, color2]
     }
 
     const SelectColors = () => {
-            const formik = useFormik({
-                initialValues: {
-                    primaryColor: '',
-                    secondaryColor: ''
+        const formik = useFormik({
+            initialValues: {
+                primaryColor: '',
+                secondaryColor: ''
 
-                },
-                onSubmit: values => {
-                    setColor1(values.primaryColor)
-                    setColor2(values.secondaryColor)
-                },
-            })
+            },
+            onSubmit: values => {
+                setColor1(values.primaryColor)
+                setColor2(values.secondaryColor)
+            },
+        })
 
         return (
             <form onSubmit={formik.handleSubmit}>
@@ -37,7 +53,7 @@ export default function Welcome(props) {
                     label="Primary Color"
                     id="primaryColor"
                     name="primaryColor"
-                    type="color"    
+                    type="color"
                     onChange={formik.handleChange}
                     value={formik.values.primaryColor}
                 />
@@ -74,8 +90,8 @@ export default function Welcome(props) {
         }
     }
 
-    function ChangeButton(language) {
-        sessionStorage.setItem('language', language)
+    function ChangeButton() {
+        const language = sessionStorage.getItem('language')
         switch (language) {
             case "english":
                 return "Welcome"
@@ -95,8 +111,6 @@ export default function Welcome(props) {
         }
     }
 
-    const options = ["portuguese", "english", "spanish", "french"]
-
     return (
         <>
             {ChangeWelcome(language)}
@@ -113,7 +127,7 @@ export default function Welcome(props) {
 
 
             </select>
-            <Button text={ChangeButton(language)} to={`/home`} color1={color1} color2={color2} language={language}/>
+            <Button text={ChangeButton(language)} to={`/home`} language={language} />
 
         </>
     )

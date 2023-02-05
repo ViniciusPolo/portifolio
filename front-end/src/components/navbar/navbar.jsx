@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Div, Ul ,Li } from "./style";
 import words from "../../words.json"
 
-export default function Navbar(params) {
+export default function Navbar() {
     const language = sessionStorage.getItem('language')
     const [whoIAm, setWhoIAm] = useState('');
     const [whatIknow, setWhatIKnow] = useState('');
@@ -15,19 +15,33 @@ export default function Navbar(params) {
     //const secondaryColor = sessionStorage.getItem('secondaryColor')
 
     useEffect(() => {
-        console.log("color2", params.color2)
-        const whoIAmSelected = words.find((e) => e.language === language)
-        setWhoIAm(whoIAmSelected.whoIAm)
-        setWhatIKnow(whoIAmSelected.whatIKnow)
-        setMyProjects(whoIAmSelected.myProjects)
-        setTalkToMe(whoIAmSelected.talkToMe)
-        setChangeLanguage(whoIAmSelected.changeLanguage)
+        fetch(`http://localhost:3004/languages/${language}`)
+        .then(response => response.json())
+        .then((data) => {
+          const json = JSON.parse(data.languages[0].words)
+          setWhoIAm(json.whoIAm)
+        setWhatIKnow(json.whatIKnow)
+        setMyProjects(json.myProjects)
+        setTalkToMe(json.talkToMe)
+        setChangeLanguage(json.changeLanguage)
+        })
+        .catch((e) => {
+            console.error(`An error occurred: ${e}`)
+        });
+        //const whoIAmSelected = words.find((e) => e.language === language)
+        //const whoIAmSelected = data.map()
+        //const whoIAmSelected = data.map()
+        // setWhoIAm(whoIAmSelected.whoIAm)
+        // setWhatIKnow(whoIAmSelected.whatIKnow)
+        // setMyProjects(whoIAmSelected.myProjects)
+        // setTalkToMe(whoIAmSelected.talkToMe)
+        // setChangeLanguage(whoIAmSelected.changeLanguage)
 
     }, [])
 
     return (
-        <Div props={params.color2} className="navbar">
-            <Ul props={params.color2} className="navbar--List">
+        <Div className="navbar">
+            <Ul className="navbar--List">
                 <Li><Link to="/whoiam">{whoIAm}</Link></Li>
                 <Li><Link to="/whatiknow">{whatIknow}</Link></Li>
                 <Li><Link to="/">{myProjects}</Link></Li>

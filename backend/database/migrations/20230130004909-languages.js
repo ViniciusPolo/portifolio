@@ -12,14 +12,14 @@ module.exports = {
       },
       language: {
         type: Sequelize.STRING(30),
-        allowNull: false,
+        allowNull: false
       },
       words: {
         type: Sequelize.JSON,
       },
       created_at: {
         type: Sequelize.DATE,
-        allowNull: false,
+        allowNull: false
       },
       updated_at: {
         type: Sequelize.DATE,

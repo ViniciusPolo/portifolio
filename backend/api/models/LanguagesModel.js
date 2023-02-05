@@ -2,9 +2,10 @@ const { Model, DataTypes } = require('sequelize')
 
 class Languages extends Model {
     static init(sequelize) {
+        console.log("entrei aqui model")
         super.init({
             language: DataTypes.STRING,
-            words: DataTypes.JSON,
+            words: DataTypes.JSON
         }, {
             sequelize,
             tableName: "languages"
@@ -13,4 +14,4 @@ class Languages extends Model {
     }
 
 }
- module.exports = Languages
+module.exports = Languages
