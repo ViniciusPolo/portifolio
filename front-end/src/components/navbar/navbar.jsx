@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 //import "./navbar.css"
 import { Div, Ul ,Li } from "./style";
 import words from "../../words.json"
+import api from "../../services/api";
 
 export default function Navbar() {
     const language = sessionStorage.getItem('language')
@@ -15,8 +16,8 @@ export default function Navbar() {
     //const secondaryColor = sessionStorage.getItem('secondaryColor')
 
     useEffect(() => {
-        fetch(`http://localhost:3004/languages/${language}`)
-        .then(response => response.json())
+        api.get(`/languages/${language}`)
+        .then(response => response.data)
         .then((data) => {
           const json = JSON.parse(data.languages[0].words)
           setWhoIAm(json.whoIAm)
@@ -47,6 +48,7 @@ export default function Navbar() {
                 <Li><Link to="/">{myProjects}</Link></Li>
                 <Li><Link to="/talktome">{talkToMe}</Link></Li>
             <Li><Link to="/">{changeLanguage}</Link></Li>
+            <Li><Link to="/settings/updateword">Settings</Link></Li>
             </Ul>
         </Div>
     )

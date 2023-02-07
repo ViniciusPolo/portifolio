@@ -5,6 +5,7 @@ import Welcome from "./components/welcome/welcome";
 import Whatiknow from "./components/whatiknow/whatiknow";
 import Whoiam from "./components/whoiam/whoiam";
 import TalkToMe from "./components/talktome/talktome";
+import UpdateWords from "./containers/settings/update_words/update_words";
 
 export default function Routers() {
     return(
@@ -15,6 +16,7 @@ export default function Routers() {
             <Route exact path="/whoiam" element={<Whoiam />}/>
             <Route exact path="/whatiknow" element={<Whatiknow />}/>
             <Route exact path="/talktome" element={<TalkToMe/>}/>
+            <Route exact path="/settings/updateword" element={<UpdateWords/>}/>
         </Routes>
     )
 }

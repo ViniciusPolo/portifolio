@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Home from "../home/home";
 import Input from "../form/input/input";
 import { useFormik } from "formik";
+import api from "../../services/api";
 
 
 export default function Welcome(props) {
@@ -16,8 +17,8 @@ export default function Welcome(props) {
     const option = [""]
 
     useEffect(() => {
-        fetch(`http://localhost:3004/languages`)
-            .then(response => response.json())
+        api.get(`http://localhost:3004/languages`)
+            .then(response => response.data)
             .then((data) => {
                 data.map((e) => {
                     option.push(e.language)
