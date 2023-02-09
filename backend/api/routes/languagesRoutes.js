@@ -11,4 +11,6 @@ router.get('/languages/:language', languagesController.indexOne);
 
 router.put('/languages/:language', languagesController.update);
 
+router.put('/languages/addword/:language', languagesController.addWord);
+
 module.exports = router

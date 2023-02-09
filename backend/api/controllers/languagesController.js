@@ -2,14 +2,14 @@ const Languages = require('../models/LanguagesModel');
 
 console.log("entrei aqui")
 
-module.exports={
-    async indexAll (req, res){
+module.exports = {
+    async indexAll(req, res) {
         const languages = await Languages.findAll()
         return res.json(languages)
     },
 
-    async store (req,res){
-        const {language, words} = req.body
+    async store(req, res) {
+        const { language, words } = req.body
         const languages = await Languages.create({
             language,
             words
@@ -21,30 +21,57 @@ module.exports={
         })
     },
 
-    async indexOne (req,res){
-        const {language} = req.params
+    async indexOne(req, res) {
+        const { language } = req.params
         console.log(req.params)
         const languages = await Languages.findAll({
-            where: {language: language}
+            where: { language: language }
         })
         return res.status(200).send({
             status: 1,
-            message: `Language ${language} found` ,
+            message: `Language ${language} found`,
             languages
         })
     },
 
-    async update (req,res){
-        const {language} = req.params
-        const {words} = req.body
-        console.log(req.params)
+    async update(req, res) {
+        const { language } = req.params
+        const { words } = req.body
         const languages = await Languages.update({
-            words : words},
-            {where: {language: language}
-        })
+            words: words
+        },
+            {
+                where: { language: language }
+            })
         return res.status(200).send({
             status: 1,
-            message: `Language ${language} updated` ,
+            message: `Language ${language} updated`,
+            languages
+        })
+    },
+
+    async addWord(req, res) {
+        const { language } = req.params
+        const { englishword, word } = req.query
+        let key = englishword
+
+        const languagesToAdd = await Languages.findAll({
+            where: { language: language }
+        })
+        const savedwords = JSON.parse(languagesToAdd[0].dataValues.words)
+        savedwords[key] = word
+
+        const languages = await Languages.update({
+            words: {
+                ...savedwords
+            }
+        },
+            {
+                where: { language: languagesToAdd[0].dataValues.language }
+            })
+        return res.status(200).send({
+            status: 1,
+            message: `Word ${word} sucessfully included on language ${language}`,
             languages
         })
     }

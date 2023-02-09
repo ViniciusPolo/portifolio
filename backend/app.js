@@ -16,7 +16,7 @@ const languagesRoutes = require('./api/routes/languagesRoutes')
 app.use(languagesRoutes)
 
 app.set('url', 'http://localhost:');
-app.set('port', 3004);
+app.set('port', 3010);
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Server started on '+ app.get('url') + app.get('port'))
