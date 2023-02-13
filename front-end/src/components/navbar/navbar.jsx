@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 //import "./navbar.css"
-import { Div, Ul ,Li } from "./style";
+import { Div, Ul ,Li, Modal, Bar, ModalTitle } from "./style";
 import words from "../../words.json"
 import api from "../../services/api";
+import UpdateWords from "../../containers/settings/update_words/update_words";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
-export default function Navbar() {
+export default function Navbar(props) {
     const language = sessionStorage.getItem('language')
     const [whoIAm, setWhoIAm] = useState('');
     const [whatIknow, setWhatIKnow] = useState('');
     const [myProjects, setMyProjects] = useState('');
     const [talkToMe, setTalkToMe] = useState('');
+    const [settings, setSettings] = useState('');
+    const [showUpdateLanguage, setShowUpdateLanguage] = useState(false)
     const [changeLanguage, setChangeLanguage] = useState('');
+    
 
     //const secondaryColor = sessionStorage.getItem('secondaryColor')
 
@@ -24,6 +30,7 @@ export default function Navbar() {
         setWhatIKnow(json.whatIKnow)
         setMyProjects(json.myProjects)
         setTalkToMe(json.talkToMe)
+        setSettings(json.settings || "Settings")
         setChangeLanguage(json.changeLanguage)
         })
         .catch((e) => {
@@ -40,7 +47,28 @@ export default function Navbar() {
 
     }, [])
 
+    function setModal(props) {
+        console.log("setModal")
+        setShowUpdateLanguage(true)
+    }
+    function closeModal(props) {
+        setShowUpdateLanguage(false)
+
+    }
+
     return (
+        <>
+        <Modal>
+            {showUpdateLanguage ? 
+            <>
+                <Bar>
+                    <button onClick={closeModal}><FontAwesomeIcon icon={faCircleXmark} color="red" size="2x"/></button>
+                </Bar>
+                <ModalTitle>{settings}</ModalTitle>
+                <UpdateWords/>
+            </>
+                 : ''}
+        </Modal>
         <Div className="navbar">
             <Ul className="navbar--List">
                 <Li><Link to="/whoiam">{whoIAm}</Link></Li>
@@ -48,8 +76,10 @@ export default function Navbar() {
                 <Li><Link to="/">{myProjects}</Link></Li>
                 <Li><Link to="/talktome">{talkToMe}</Link></Li>
             <Li><Link to="/">{changeLanguage}</Link></Li>
-            <Li><Link to="/settings/updateword">Settings</Link></Li>
+            <Li><Link to="/settings/updateword">{settings}</Link></Li>
+            <Li><button onClick={setModal}>{settings}</button></Li>
             </Ul>
         </Div>
+        </>
     )
 }

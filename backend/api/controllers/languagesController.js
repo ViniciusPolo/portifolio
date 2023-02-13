@@ -53,6 +53,19 @@ module.exports = {
     async addWord(req, res) {
         const { language } = req.params
         const { englishword, word } = req.query
+
+        if (!englishword) {
+            return res.status(400).send({
+                status: 1,
+                message: `We need a english word to reference`
+            })
+        }
+        if (!word) {
+            return res.status(400).send({
+                status: 1,
+                message: `We need a word to add`
+            })
+        }
         let key = englishword
 
         const languagesToAdd = await Languages.findAll({

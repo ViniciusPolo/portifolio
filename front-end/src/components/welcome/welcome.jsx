@@ -17,7 +17,7 @@ export default function Welcome(props) {
     const option = [""]
 
     useEffect(() => {
-        api.get(`http://localhost:3004/languages`)
+        api.get(`/languages`)
             .then(response => response.data)
             .then((data) => {
                 data.map((e) => {

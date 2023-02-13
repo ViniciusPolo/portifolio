@@ -19,3 +19,23 @@ list-style: none;
 margin-right: 2%;
 white-space: nowrap;
 `
+
+export const Modal = styled.div`
+position: absolute;
+box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+background-color: rgba(0, 1, 2, 0.1);
+top: 35%;
+left: 45%;
+z-index: 5;
+`
+
+export const Bar = styled.div`
+position: absolute;
+left : 87%
+`
+
+export const ModalTitle = styled.span`
+margin-left: 30%;
+padding-top: 50%;
+text-transform: uppercase
+`

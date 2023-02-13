@@ -3,6 +3,7 @@ import Navbar from "../navbar/navbar";
 import Whatiknow from "../whatiknow/whatiknow";
 import Whoiam from "../whoiam/whoiam";
 import Welcome from "../welcome/welcome"
+import UpdateWords from "../../containers/settings/update_words/update_words";
 
 
 export default function Home(props) {

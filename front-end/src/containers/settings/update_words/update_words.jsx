@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import Input from "../../../components/form/input/input";
 import Navbar from "../../../components/navbar/navbar";
 import api from "../../../services/api";
+import {Div, Select} from "./style"
 
 export default function UpdateWords(props) {
     const languages = sessionStorage.getItem('language')
@@ -24,7 +25,7 @@ export default function UpdateWords(props) {
             });
     }, [])
 
-    const UpdateWords = () => {
+    const UpdateWords = (props) => {
         const formik = useFormik({
             initialValues: {
                 englishWord: '',
@@ -32,13 +33,18 @@ export default function UpdateWords(props) {
 
             },
             onSubmit: values => {
-                alert(values.englishWord + "----", values.word)
+                api.put(`/languages/addword/${language}?englishword=${values.englishWord }&word=${values.word}`)
+                .then(
+                    alert(values.word + "sucessfully added on language" + language)
+                )
             },
         })
 
         return (
+            <Div>
+
             <form onSubmit={formik.handleSubmit}>
-                <select name="" id="choselanguage"
+                <Select name="" id="choselanguage"
                     value={language}
                     onChange={e => setLanguage(e.target.value)}>
                     {options.map((value) => (
@@ -49,7 +55,7 @@ export default function UpdateWords(props) {
                     ))}
 
 
-                </select>
+                </Select>
 
                 <Input
                     label="English Word"
@@ -58,7 +64,7 @@ export default function UpdateWords(props) {
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.englishWord}
-                />
+                    />
                 <Input
                     label="word"
                     id="word"
@@ -66,18 +72,17 @@ export default function UpdateWords(props) {
                     type="text"
                     onChange={formik.handleChange}
                     value={formik.values.word}
-                />
+                    />
                 <button type="submit">Update Word</button>
             </form>
+            </Div>
         )
     }
-
 
     return (
 
         <>
-            <Navbar props={props} language={languages}/>
-            {UpdateWords()}
+            {UpdateWords(props)}
         </>
     )
 }
