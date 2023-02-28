@@ -3,6 +3,7 @@ const dbConfig = require('../config/database.js')
 
 const conexao = new Sequelize(dbConfig)
 const languages = require('../api/models/LanguagesModel')
+const users = require('../api/models/UsersModel')
 
 try{
     conexao.authenticate();
@@ -12,5 +13,6 @@ try{
 }
 
 languages.init(conexao)
+users.init(conexao)
 
 module.exports = conexao

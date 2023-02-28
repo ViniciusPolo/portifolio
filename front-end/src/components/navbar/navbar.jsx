@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate }  from "react-router-dom"
 import { Link } from "react-router-dom";
 //import "./navbar.css"
 import { Div, Ul ,Li, Modal, Bar, ModalTitle } from "./style";
@@ -9,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar(props) {
+    const history = useNavigate();
+
     const language = sessionStorage.getItem('language')
     const [whoIAm, setWhoIAm] = useState('');
     const [whatIknow, setWhatIKnow] = useState('');
@@ -65,7 +68,7 @@ export default function Navbar(props) {
                     <button onClick={closeModal}><FontAwesomeIcon icon={faCircleXmark} color="red" size="2x"/></button>
                 </Bar>
                 <ModalTitle>{settings}</ModalTitle>
-                <UpdateWords/>
+                <UpdateWords onSubmit={() => history(-1)}/>
             </>
                  : ''}
         </Modal>

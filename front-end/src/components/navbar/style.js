@@ -23,7 +23,6 @@ white-space: nowrap;
 export const Modal = styled.div`
 position: absolute;
 box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
-background-color: rgba(0, 1, 2, 0.1);
 top: 35%;
 left: 45%;
 z-index: 5;

@@ -1,7 +1,5 @@
 const Languages = require('../models/LanguagesModel');
 
-console.log("entrei aqui")
-
 module.exports = {
     async indexAll(req, res) {
         const languages = await Languages.findAll()

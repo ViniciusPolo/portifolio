@@ -6,6 +6,7 @@ import api from "../../../services/api";
 import {Div, Select} from "./style"
 
 export default function UpdateWords(props) {
+
     const languages = sessionStorage.getItem('language')
     const [language, setLanguage] = useState((''));
     const [options, setOptions] = useState([]);
@@ -13,8 +14,8 @@ export default function UpdateWords(props) {
 
     useEffect(() => {
         api.get(`/languages`)
-            .then(response => response.data)
-            .then((data) => {
+                .then(response => response.data)
+                .then((data) => {
                 data.map((e) => {
                     option.push(e.language)
                 })
@@ -73,7 +74,7 @@ export default function UpdateWords(props) {
                     onChange={formik.handleChange}
                     value={formik.values.word}
                     />
-                <button type="submit">Update Word</button>
+                <Input type="submit" value="Uptade Word"/>
             </form>
             </Div>
         )
